@@ -1,0 +1,27 @@
+server:
+  port: 5081
+
+# feign URL
+feign:
+  hystrix:
+    enabled: true
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 5000
+        circuitBreaker:
+          requestVolumeThreshold: 2
+          errorThresholdPercentage: 50
+          enabled: true
+  http-bin-api:
+    url: http://127.0.0.1:5080
+  client:
+    config:
+      default:
+        loggerLevel: BASIC
+        # feign의 전역 timeout 설정 : 5초
+        connectTimeout: 5000
+        readTimeout: 5000
+
